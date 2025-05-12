@@ -26,7 +26,7 @@ function App() {
     
       {connexion ? (
         <>
-          <h1>Bon retour parmis nous {prenomProfil} !</h1>
+          <h1>Bon retour parmi nous {prenomProfil} !</h1>
           <button onClick={() => Deconnecter()}>Se Déconnecter</button>
           <ListeNotes id_eleve={idProfil}/>
         </>
