@@ -67,3 +67,21 @@ button:focus-visible {
     color :#C8C6D7
   }
 }
+.poulpe {
+  width: 100px;
+  margin: 0 auto 1rem;
+  display: block;
+  animation: flotter 4s ease-in-out infinite;
+}
+
+@keyframes flotter {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}

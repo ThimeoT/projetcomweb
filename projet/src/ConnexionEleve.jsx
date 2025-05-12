@@ -25,7 +25,7 @@ function ConnexionEleve(props) {
             .then((data) => {
                 if (data.success) {
                     setMessage("Connexion réussie !");
-                    props.ActualiserConnexion2({ connexion: data.success, prenom: data.user.prenom, profil: data.user, id:data.user.id }); // Harmonisation des noms
+                    props.ActualiserConnexion2({ connexion: data.success, prenom: data.user.prenom, profil: data.user, id: data.user.id }); // Harmonisation des noms
                 } else {
                     setMessage("Échec de la connexion.");
                     props.ActualiserConnexion2({ connexion: false });
@@ -38,7 +38,8 @@ function ConnexionEleve(props) {
     };
 
     return (
-        <>
+        <div className="connexion-container">
+            <img src="/poulpe.png" alt="Poulpe mignon" className="poulpe" />
             <input
                 id="emailInput"
                 type="email"
@@ -58,7 +59,7 @@ function ConnexionEleve(props) {
             <br />
             <MonBouton label="Connexion" onClick={seConnecter} />
             <p>{message}</p>
-        </>
+        </div>
     );
 }
 
