@@ -34,7 +34,7 @@ if ($url[0] === 'notes_eleve' && isset($url[1])) {
     if ($notes) {
         envoiJSON([
             'success' => true,
-            'user' => $notes
+            'notes' => $notes
         ]);
     } else {
         envoiJSON([

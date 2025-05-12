@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ConnexionEleve from './ConnexionEleve.jsx';
+import ListeNotes from './ListeNotes.jsx';
 
 function App() {
   const [connexion, setConnexion] = useState(false);
@@ -12,6 +13,7 @@ function App() {
     if (objet.connexion) {
       console.log(objet.profil)
       setPrenomProfil(objet.prenom); // Utilise la propriété `nom`
+      setIdProfil(objet.id);
     }
   };
   const Deconnecter = () => {
@@ -21,11 +23,12 @@ function App() {
 
   return (
     <>
-
+    
       {connexion ? (
         <>
           <h1>Bon retour parmis nous {prenomProfil} !</h1>
           <button onClick={() => Deconnecter()}>Se Déconnecter</button>
+          <ListeNotes id_eleve={idProfil}/>
         </>
       ) : (
         <>

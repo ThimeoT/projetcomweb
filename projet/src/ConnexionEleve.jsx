@@ -25,7 +25,7 @@ function ConnexionEleve(props) {
             .then((data) => {
                 if (data.success) {
                     setMessage("Connexion réussie !");
-                    props.ActualiserConnexion2({ connexion: data.success, prenom: data.user.prenom, profil: data.user }); // Harmonisation des noms
+                    props.ActualiserConnexion2({ connexion: data.success, prenom: data.user.prenom, profil: data.user, id:data.user.id }); // Harmonisation des noms
                 } else {
                     setMessage("Échec de la connexion.");
                     props.ActualiserConnexion2({ connexion: false });
