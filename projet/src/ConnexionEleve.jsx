@@ -19,7 +19,7 @@ function ConnexionEleve(props) {
 
     const seConnecter = () => {
         console.log(identifiant, motDePasse);
-        const url = `http://localhost/projetcomweb/API/connexion/${identifiant}/${motDePasse}`;
+        const url = `https://ttonon.zzz.bordeaux-inp.fr/projetcomweb/API/index.php?methode=connexion&email=${identifiant}&mdp=${motDePasse}`;
         fetch(url)
             .then((response) => response.json())
             .then((data) => {

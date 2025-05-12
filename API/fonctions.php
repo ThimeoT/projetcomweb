@@ -36,9 +36,9 @@ function recupNotes($eleve_id)
                     e.date,
                     r.note_obtenue,
                     r.bareme
-                FROM resultat r
-                JOIN evaluation e ON r.id_eval = e.id
-                JOIN matiere m ON e.id_matiere = m.id
+                FROM Resultat r
+                JOIN Evaluation e ON r.id_eval = e.id
+                JOIN Matiere m ON e.id_matiere = m.id
                 WHERE r.id_eleve = ?";
     $stmt = $bdd->prepare($requete);
     $stmt->execute([$eleve_id]);

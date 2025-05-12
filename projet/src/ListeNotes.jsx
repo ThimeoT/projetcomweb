@@ -7,7 +7,7 @@ function ListeNotes({ id_eleve }) {
 
     useEffect(() => {
         if (id_eleve === -1) return;
-        fetch(`http://localhost/projetcomweb/API/notes_eleve/${id_eleve}`)
+        fetch(`https://ttonon.zzz.bordeaux-inp.fr/projetcomweb/API/index.php?methode=notes_eleve&id=${id_eleve}`)
             .then(res => res.json())
             .then(data => {
                 if (data.success) {

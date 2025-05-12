@@ -1,19 +1,18 @@
 <?php
-header("Access-Control-Allow-Origin: *"); // Autorise toutes les origines
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Méthodes autorisées
-header("Access-Control-Allow-Headers: Content-Type, Authorization"); // En-têtes autorisés
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-// echo password_hash("clairepwd",PASSWORD_DEFAULT);
 require_once('connexionBDD.php');
 require_once 'fonctions.php';
 
-$url = explode('/', $_GET['url'] ?? '');
-
-if ($url[0] === 'connexion' && isset($url[1]) && isset($url[2])) {
-    $email =$url[1];
-    $mdp = $url[2];
+// Utilisation des paramètres GET classiques
+$methode = $_GET['methode'] ?? '';
+if ($methode === 'connexion' && isset($_GET['email']) && isset($_GET['mdp'])) {
+    $email = $_GET['email'];
+    $mdp = $_GET['mdp'];
     $user = verifierConnexion($email, $mdp);
-    
+
     if ($user) {
         envoiJSON([
             'success' => true,
@@ -28,8 +27,9 @@ if ($url[0] === 'connexion' && isset($url[1]) && isset($url[2])) {
     }
     exit;
 }
-if ($url[0] === 'notes_eleve' && isset($url[1])) {
-    $id =intval($url[1]);
+
+if ($methode === 'notes_eleve' && isset($_GET['id'])) {
+    $id = intval($_GET['id']);
     $notes = recupNotes($id);
     if ($notes) {
         envoiJSON([
@@ -49,5 +49,4 @@ envoiJSON([
     'success' => false,
     'message' => 'Route inconnue'
 ]);
-//verifierConnexion("claire.lemoine@example.com","clairepwd")
 ?>
