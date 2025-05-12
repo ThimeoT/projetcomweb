@@ -1,46 +1,65 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
 
 function MonBouton(props) {
     return (
-        <button>
+        <button onClick={props.onClick}>
             {props.label}
         </button>
     );
 }
 
-function App() {
+function ConnexionEleve(props) {
     const [identifiant, setIdentifiant] = useState("");
     const [motDePasse, setMotDePasse] = useState("");
+    const [message, setMessage] = useState("");
 
-    const gererIdentifiant = (e) => {
-        setIdentifiant(e.target.value);
-    };
+    const actualiserIdentifiant = (event) => setIdentifiant(event.target.value);
+    const actualiserMotDePasse = (event) => setMotDePasse(event.target.value);
 
-    const gererMotDePasse = (e) => {
-        setMotDePasse(e.target.value);
+    const seConnecter = () => {
+        console.log(identifiant, motDePasse);
+        const url = `http://localhost/projetcomweb/API/connexion/${identifiant}/${motDePasse}`;
+        fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    setMessage("Connexion réussie !");
+                    props.ActualiserConnexion2({ connexion: data.success, prenom: data.user.prenom, profil: data.user }); // Harmonisation des noms
+                } else {
+                    setMessage("Échec de la connexion.");
+                    props.ActualiserConnexion2({ connexion: false });
+                }
+            })
+            .catch((error) => {
+                console.error("Erreur :", error);
+                setMessage("Erreur lors de la connexion.");
+            });
     };
 
     return (
         <>
             <input
+                id="emailInput"
                 type="email"
                 value={identifiant}
-                onChange={gererIdentifiant}
+                onChange={actualiserIdentifiant}
                 placeholder="Identifiant/Mail"
             />
             <br />
             <input
+                id="mdpInput"
                 type="password"
                 value={motDePasse}
-                onChange={gererMotDePasse}
+                onChange={actualiserMotDePasse}
                 placeholder="Mot de passe"
             />
-            <br /><br />
-            <MonBouton label="Connexion" />
+            <br />
+            <br />
+            <MonBouton label="Connexion" onClick={seConnecter} />
+            <p>{message}</p>
         </>
     );
 }
 
-
-export default App
+export default ConnexionEleve;
