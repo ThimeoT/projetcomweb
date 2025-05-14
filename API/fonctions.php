@@ -3,7 +3,6 @@ require_once("connexionBDD.php");
 function envoiJSON($tab)
 {
     header('Content-Type: application/json');
-    //print_r($tab);
     $json = json_encode($tab, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();
@@ -20,7 +19,7 @@ function verifierConnexion($email, $mdp)
     // Vérifier si l'utilisateur existe
     $user = $reponse->fetch(PDO::FETCH_ASSOC);
     if ($user && password_verify($mdp, $user['mdp_hash'])) {
-        // Ne jamais renvoyer le hash
+        // on retire le mot de passe avec le hash
         unset($user['mdp_hash']);
         return $user; // retourne les données de l'utilisateur
     }
@@ -40,8 +39,10 @@ function recupNotes($eleve_id)
                 JOIN Evaluation e ON r.id_eval = e.id
                 JOIN Matiere m ON e.id_matiere = m.id
                 WHERE r.id_eleve = ?";
-    $stmt = $bdd->prepare($requete);
-    $stmt->execute([$eleve_id]);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $reponse = $bdd->prepare($requete);
+    $reponse->execute([$eleve_id]);
+    $notes=$reponse->fetchAll(PDO::FETCH_ASSOC);
+    return $notes;
+
 }
 ?>

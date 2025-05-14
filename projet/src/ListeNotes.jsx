@@ -8,7 +8,7 @@ function ListeNotes({ id_eleve }) {
     useEffect(() => {
         if (id_eleve === -1) return;
         fetch(`https://ttonon.zzz.bordeaux-inp.fr/projetcomweb/API/index.php?methode=notes_eleve&id=${id_eleve}`)
-            .then(res => res.json())
+            .then(reponse => reponse.json())
             .then(data => {
                 if (data.success) {
                     // On filtre pour ne garder que la version objet (et pas les index numériques)
