@@ -10,15 +10,15 @@ function MonBouton(props) {
 }
 
 function ConnexionEleve(props) {
-    const [identifiant, setIdentifiant] = useState("");
-    const [motDePasse, setMotDePasse] = useState("");
-    const [message, setMessage] = useState("");
-
-    const actualiserIdentifiant = (event) => setIdentifiant(event.target.value);
+    const [identifiant, setIdentifiant] = useState(""); // permet de récupérer l'id de l'élève
+    const [motDePasse, setMotDePasse] = useState(""); // même chose pour le mot de passe
+    const [message, setMessage] = useState(""); // gestion des messages d'erreur
+    // pour chaque fonction on récupère la valeur de l'input associé
+    const actualiserIdentifiant = (event) => setIdentifiant(event.target.value); 
     const actualiserMotDePasse = (event) => setMotDePasse(event.target.value);
 
     const seConnecter = () => {
-        console.log(identifiant, motDePasse);
+        //console.log(identifiant, motDePasse); permettant de vérifier que l'on a bien rentré le bon mot de passe 
         const url = `https://ttonon.zzz.bordeaux-inp.fr/projetcomweb/API/index.php?methode=connexion&email=${identifiant}&mdp=${motDePasse}`;
         fetch(url)
             .then((response) => response.json())
@@ -44,7 +44,7 @@ function ConnexionEleve(props) {
                 id="emailInput"
                 type="email"
                 value={identifiant}
-                onChange={actualiserIdentifiant}
+                onChange={actualiserIdentifiant} //attribut onChange qui aurait pu être codé avec un useEvent
                 placeholder="Identifiant/Mail"
             />
             <br />
@@ -52,7 +52,7 @@ function ConnexionEleve(props) {
                 id="mdpInput"
                 type="password"
                 value={motDePasse}
-                onChange={actualiserMotDePasse}
+                onChange={actualiserMotDePasse} // même chose ici
                 placeholder="Mot de passe"
             />
             <br />
