@@ -3,21 +3,28 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /* prise en compte automatique du mode jour ou nuit */
   color-scheme: light dark;
+  /*rgba pour intégrer de la transparence */
   color: rgba(255, 255, 255, 0.87);
+  
+  /* couleur de fond du mode sombre*/
   background-color: #242424;
 
+  /* permet d'améliorer le rendu du texte, et de retirer les styles italique et gras */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+/* couleur des liens */
+a { 
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+/* légère modification lors du hover */
 a:hover {
   color: #535bf2;
 }
@@ -25,14 +32,14 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  place-items: center; /* permet de tout centrer avec flex */
   min-width: 320px;
   min-height: 100vh;
 }
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 1.1; /* pour réduire l'espacement entre les lignes*/
 }
 
 button {
@@ -44,29 +51,35 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s;/* modification progressive de la bordure pour un rendu fluide lors du hover*/
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 4px auto -webkit-focus-ring-color; 
 }
-
+/* application du thème clair selon la préférence grâce à une media querie $*/
 @media (prefers-color-scheme: light) {
   :root {
     color: #4A4063;
     background-color: #BFACC8;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #4A4063;
-    color :#C8C6D7
+    color: #C8C6D7
   }
 }
+
+/* image du poulpe centrée horizontalement et animée */
 .poulpe {
   width: 100px;
   margin: 0 auto 1rem;
@@ -74,6 +87,7 @@ button:focus-visible {
   animation: flotter 4s ease-in-out infinite;
 }
 
+/* animation du poulpe */
 @keyframes flotter {
 
   0%,
