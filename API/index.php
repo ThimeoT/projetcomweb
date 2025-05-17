@@ -7,12 +7,13 @@ require_once('connexionBDD.php');
 require_once 'fonctions.php';
 
 // Utilisation des paramètres GET classiques
-$methode = $_GET['methode'] ?? '';
+$methode = $_GET['methode'] ?? ''; //on détermine ce que l'utilisateur veut récupérer
+// si il veut se connecter et que les champs de connexion sont renseignés
 if ($methode === 'connexion' && isset($_GET['email']) && isset($_GET['mdp'])) {
     $email = $_GET['email'];
     $mdp = $_GET['mdp'];
     $user = verifierConnexion($email, $mdp);
-
+    // on effectue la requête et on renvoie le résultat de cette dernière
     if ($user) {
         envoiJSON([
             'success' => true,
@@ -27,8 +28,8 @@ if ($methode === 'connexion' && isset($_GET['email']) && isset($_GET['mdp'])) {
     }
     exit;
 }
-
-if ($methode === 'notes_eleve' && isset($_GET['id'])) {
+// si on cherche à 'écupérer les notes et que l'id de l'élève est renseigné
+if ($methode === 'notes_eleve' && isset($_GET['id'])) { // même chose que pour la connexion
     $id = intval($_GET['id']);
     $notes = recupNotes($id);
     if ($notes) {
@@ -44,7 +45,7 @@ if ($methode === 'notes_eleve' && isset($_GET['id'])) {
     }
     exit;
 }
-
+// dans le cas où le lien ne contient aucun type de requête renseigné donc la route est inconnue
 envoiJSON([
     'success' => false,
     'message' => 'Route inconnue'

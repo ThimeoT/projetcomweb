@@ -13,7 +13,7 @@ function verifierConnexion($email, $mdp)
     global $bdd;
     // Préparer la requête pour récupérer l'utilisateur par ID
     $requete = "SELECT id, nom, prenom, mail, mdp_hash FROM Eleve WHERE mail = ?";
-    $reponse = $bdd->prepare($requete);
+    $reponse = $bdd->prepare($requete); // requête avec promesse
     $reponse->execute(array($email));
 
     // Vérifier si l'utilisateur existe
@@ -28,7 +28,7 @@ function verifierConnexion($email, $mdp)
 
 
 function recupNotes($eleve_id)
-{
+{ // requête classique avec les Join pour avoir les champs avec les noms après les champs indicés
     global $bdd;
     $requete = "SELECT 
                     m.nom AS matiere,
